@@ -1,5 +1,6 @@
 #ifndef NODE
 #define NODE
+
 #include <string>
 #include <time.h>
 
