@@ -1,4 +1,5 @@
 #include "todo.hpp"
+
 #include <iostream>
 #include <fstream>
 #include <ctime>
@@ -11,7 +12,7 @@ Todo::Todo()
     load_file();
 }
 
-void Todo::add(const std::string& description, time_t dedline) {
+void Todo::add(const std::string& description, time_t dedline){
     m_todo.push_back(new Node(description, "unfulfilled", dedline));
     save_file();
 }
@@ -35,11 +36,15 @@ void Todo::modify_task(int index, const std::string& newdescription) {
 }
 
 void Todo::print() {
-    for(int i = 0; i < m_todo.size(); ++i) {
-        std::cout << "description: " << m_todo[i]->get_description() << std::endl;
-        std::cout << "status:  " << m_todo[i]->get_status() << std::endl;
-        std::cout << "dedline: " << m_todo[i]->get_dedline() << std::endl;
-        std::cout << std::endl;
+    if(m_todo.size() == 0) {
+        std::cout << "File is empty. " << std::endl;
+    } else {
+        for(int i = 0; i < m_todo.size(); ++i) {
+            std::cout << "description: " << m_todo[i]->get_description() << std::endl;
+            std::cout << "status:  " << m_todo[i]->get_status() << std::endl;
+            std::cout << "dedline: " << m_todo[i]->get_dedline() << std::endl;
+            std::cout << std::endl;
+        }
     }
 }
 
