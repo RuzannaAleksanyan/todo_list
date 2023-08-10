@@ -1,7 +1,9 @@
 #ifndef TODOLIDT
 #define TODOLIDT
+
 #include <string>
 #include <vector>
+
 #include "node.hpp"
 
 class Todo {
