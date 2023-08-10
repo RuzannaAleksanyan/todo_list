@@ -30,9 +30,10 @@ void play()
 
         int choice {0};
 
+        display_menu();
+        
         while (true) {
-                display_menu();
-
+                std::cout << "Enter your choice: ";
                 std::cin >> choice;
 
                 if(choice == 0) {
@@ -40,7 +41,7 @@ void play()
                 } else if(choice == 1) {
                         std::string description;
                         std::cout << "Enter task description: ";
-                        std::cin.ignore(); 
+                        std::cin.ignore(); // Clear the input buffer
                         std::getline(std::cin, description);
 
                         std::string deadlineStr;
@@ -54,12 +55,12 @@ void play()
                         if (iss.fail()) {
                         std::cout << "Invalid deadline format. Please use YYYY-MM-DD HH:MM:SS." << std::endl;
                         } else {
-                            time_t deadline = std::mktime(&timeinfo);
-                            if (deadline == -1) {
-                                    std::cout << "Error converting deadline to time_t." << std::endl;
-                            } else {
-                                    todo.add(description, deadline);
-                            }
+                        time_t deadline = std::mktime(&timeinfo);
+                        if (deadline == -1) {
+                                std::cout << "Error converting deadline to time_t." << std::endl;
+                        } else {
+                                todo.add(description, deadline);
+                        }
                         }
                 } else if(choice == 2) {
                         int index;
