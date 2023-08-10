@@ -38,23 +38,9 @@ void play()
                 if(choice == 0) {
                         break;
                 } else if(choice == 1) {
-                        // std::string description;
-                        // std::cout << "Enter task description: ";
-                        // std::cin.ignore(); // Add this line to clear the input buffer
-                        // std::getline(std::cin, description);
-
-                        // std::string deadline;
-                        // std::cout << "Enter deadline (Unix timestamp): ";
-                        // std::cin >> deadline;
-                        // std::tm* timeinfo = std::gmtime(&deadline);
-                        // char timeStr[80];
-                        // strftime(timeStr, sizeof(timeStr), "%Y-%m-%d %H:%M:%S", timeinfo);
-                        
-                        // todo.add(description, deadline);
-
                         std::string description;
                         std::cout << "Enter task description: ";
-                        std::cin.ignore(); // Clear the input buffer
+                        std::cin.ignore(); 
                         std::getline(std::cin, description);
 
                         std::string deadlineStr;
@@ -68,13 +54,12 @@ void play()
                         if (iss.fail()) {
                         std::cout << "Invalid deadline format. Please use YYYY-MM-DD HH:MM:SS." << std::endl;
                         } else {
-                        time_t deadline = std::mktime(&timeinfo);
-                        if (deadline == -1) {
-                                std::cout << "Error converting deadline to time_t." << std::endl;
-                        } else {
-                                // Now 'deadline' holds the time_t value for the entered deadline
-                                todo.add(description, deadline);
-                        }
+                            time_t deadline = std::mktime(&timeinfo);
+                            if (deadline == -1) {
+                                    std::cout << "Error converting deadline to time_t." << std::endl;
+                            } else {
+                                    todo.add(description, deadline);
+                            }
                         }
                 } else if(choice == 2) {
                         int index;
