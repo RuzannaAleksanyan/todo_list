@@ -11,7 +11,7 @@ Todo::Todo()
     load_file();
 }
 
-void Todo::add(const std::string& description, time_t dedline){
+void Todo::add(const std::string& description, time_t dedline) {
     m_todo.push_back(new Node(description, "unfulfilled", dedline));
     save_file();
 }
