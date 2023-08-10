@@ -41,7 +41,7 @@ void play()
                 } else if(choice == 1) {
                         std::string description;
                         std::cout << "Enter task description: ";
-                        std::cin.ignore(); // Clear the input buffer
+                        std::cin.ignore(); 
                         std::getline(std::cin, description);
 
                         std::string deadlineStr;
