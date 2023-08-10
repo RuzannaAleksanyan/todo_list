@@ -12,8 +12,8 @@ Todo::Todo()
     load_file();
 }
 
-void Todo::add(const std::string& description, time_t dedline){
-    m_todo.push_back(new Node(description, "unfulfilled", dedline));
+void Todo::add(const std::string& description, time_t deadline){
+    m_todo.push_back(new Node(description, "unfulfilled", deadline));
     save_file();
 }
 
@@ -42,7 +42,7 @@ void Todo::print() {
         for(int i = 0; i < m_todo.size(); ++i) {
             std::cout << "description: " << m_todo[i]->get_description() << std::endl;
             std::cout << "status:  " << m_todo[i]->get_status() << std::endl;
-            std::cout << "dedline: " << m_todo[i]->get_dedline() << std::endl;
+            std::cout << "deadline: " << m_todo[i]->get_deadline() << std::endl;
             std::cout << std::endl;
         }
     }
@@ -62,7 +62,7 @@ void Todo::completed_task() {
         if(m_todo[i]->get_status() == "done") {
             std::cout << "description: " << m_todo[i]->get_description() << std::endl;
             std::cout << "status:  " << m_todo[i]->get_status() << std::endl;
-            std::cout << "dedline: " << m_todo[i]->get_dedline() << std::endl;
+            std::cout << "deadline: " << m_todo[i]->get_deadline() << std::endl;
             std::cout << std::endl;
         }
     }
@@ -73,7 +73,7 @@ void Todo::uncompleted_task() {
         if(m_todo[i]->get_status() == "unfulfilled") {
             std::cout << "description: " << m_todo[i]->get_description() << std::endl;
             std::cout << "status:  " << m_todo[i]->get_status() << std::endl;
-            std::cout << "dedline: " << m_todo[i]->get_dedline() << std::endl;
+            std::cout << "deadline: " << m_todo[i]->get_deadline() << std::endl;
             std::cout << std::endl;
         }
     }
@@ -87,9 +87,9 @@ void Todo::save_file() {
             report_file << "description: " << m_todo[i]->get_description() << std::endl;
             report_file << "status:      " << m_todo[i]->get_status() << std::endl;
             char buffer[80];
-            time_t t = m_todo[i]->get_dedline();
+            time_t t = m_todo[i]->get_deadline();
             std::strftime(buffer, sizeof(buffer), "%Y-%m-%d %H:%M:%S", std::localtime(&t));
-            report_file << "dedline:     " << buffer << std::endl;
+            report_file << "deadline:     " << buffer << std::endl;
             report_file << std::endl;
         }
         report_file.close();
@@ -102,7 +102,7 @@ void Todo::is_approaching_deadline() const
 {
     time_t current_time = time(nullptr);
     for(int i = 0; i < m_todo.size(); ++i) {
-        if((m_todo[i]->get_status() != "done") && (m_todo[i]->get_dedline() - current_time < 24 * 60 * 60)) {
+        if((m_todo[i]->get_status() != "done") && (m_todo[i]->get_deadline() - current_time < 24 * 60 * 60)) {
             m_todo[i]->set_description(m_todo[i]->get_description() + "  The deadline is near");
         }
     }
@@ -116,14 +116,14 @@ void Todo::load_file() {
             std::string lable;
             std::string description;
             std::string status;
-            std::string dedline;
+            std::string deadline;
             std::string t;
 
             load_file >> lable >> description;
             load_file >> lable >> status;
-            load_file >> lable >> dedline;
+            load_file >> lable >> deadline;
             load_file >> t;
-            std::string str = dedline + " " + t;
+            std::string str = deadline + " " + t;
 
             time_t time = convert(str);
             if (time != -1) { 
