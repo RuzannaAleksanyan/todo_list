@@ -12,13 +12,13 @@ private:
 
     void load_file();
     void save_file();
-    time_t convert(const std::string& dedline);
+    time_t convert(const std::string& deadline);
     
 public:
     Todo();
     ~Todo() = default;
 
-    void add(const std::string& description, time_t dedline);
+    void add(const std::string& description, time_t deadline);
     void remove(int index);
 
     void modify_task(int index, const std::string& newdescription);
