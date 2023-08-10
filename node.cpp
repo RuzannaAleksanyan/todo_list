@@ -3,7 +3,6 @@
 Node::Node(const std::string& description, const std::string& status, time_t time):
         m_description{description},  m_status{status}, m_dedline{time}
 {
-
 }
 
 std::string Node::get_description() const {
